@@ -1,7 +1,11 @@
 local enabled, timer = false, 10000
 
-ESX.RegisterUsableItem(Config.itemName, function()
-    toggleLaser()
+exports(Config.itemName, function(data, slot)
+        exports.ox_inventory:useItem(data, function(data)
+            if data then
+                toggleLaser()
+            end
+        end)
 end)
 
 function toggleLaser()
