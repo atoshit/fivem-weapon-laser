@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38bebd5a-81ab-466e-9874-ad892972919e" name="Changes" comment="Add animation">
+    <list default="true" id="38bebd5a-81ab-466e-9874-ad892972919e" name="Changes" comment="Fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client.lua" afterDir="false" />
     </list>
@@ -72,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727228868466</updated>
-      <workItem from="1727228869701" duration="6970000" />
+      <workItem from="1727228869701" duration="7439000" />
     </task>
     <task id="LOCAL-00001" summary="Full System">
       <option name="closed" value="true" />
@@ -282,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727234963847</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Fix">
+      <option name="closed" value="true" />
+      <created>1727235946206</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1727235946206</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,6 +299,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Full System" />
     <MESSAGE value="Add animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add animation" />
+    <MESSAGE value="Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix" />
   </component>
 </project>

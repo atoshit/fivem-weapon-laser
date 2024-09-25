@@ -1,6 +1,6 @@
 local enabled = false
-local lasers = {}
 local currentWeapon = nil
+local lastLaserData = {}
 
 RegisterCommand("draw:laser", function()
     ESX.TriggerServerCallback("atoshi:hasItem", function(hasItem)
@@ -20,10 +20,8 @@ function toggleLaser()
         return
     end
 
+    enabled = not enabled
     if enabled then
-        disableLaser()
-    else
-        enabled = true
         ESX.ShowNotification("Le laser des armes est activé")
         Citizen.CreateThread(function()
             while enabled do
@@ -40,41 +38,36 @@ function toggleLaser()
                     local weapon = GetCurrentPedWeaponEntityIndex(PlayerPedId())
                     local offset = GetOffsetFromEntityInWorldCoords(weapon, 0, 0, -0.01)
                     local hit, coords = RayCastPed(offset, 150000, PlayerPedId())
+
                     if hit ~= 0 then
-                        TriggerServerEvent('atoshi:updateLaser', offset, coords)
+                        lastLaserData = { offset = offset, coords = coords }
+                        SetStateBagValue("laser_position", { offset = offset, coords = coords })
                     end
                 else
-                    TriggerServerEvent('atoshi:removeLaser')
+                    SetStateBagValue("laser_position", nil)
                 end
-                Citizen.Wait(0)
+
+                Citizen.Wait(100)
             end
         end)
+    else
+        disableLaser()
     end
 end
 
 function disableLaser()
     enabled = false
     ESX.ShowNotification("Le laser des armes est désactivé")
-    TriggerServerEvent('atoshi:toggleLaser', false)
-    TriggerServerEvent('atoshi:removeLaser')
+    SetStateBagValue("laser_position", nil)
     currentWeapon = nil
 end
 
-RegisterNetEvent('atoshi:syncLaser', function(playerId, offset, coords)
-    lasers[playerId] = { offset = offset, coords = coords }
-end)
-
-RegisterNetEvent('atoshi:clearLaser', function(playerId)
-    lasers[playerId] = nil
-end)
-
 Citizen.CreateThread(function()
     while true do
-        for playerId, laserData in pairs(lasers) do
-            if laserData then
-                DrawLine(laserData.offset.x, laserData.offset.y, laserData.offset.z, laserData.coords.x, laserData.coords.y, laserData.coords.z, 10, 246, 0, 255)
-                DrawSphere2(laserData.coords, 0.01, 10, 246, 0, 255)
-            end
+        local laserData = GetStateBagValue("laser_position")
+        if laserData then
+            DrawLine(laserData.offset.x, laserData.offset.y, laserData.offset.z, laserData.coords.x, laserData.coords.y, laserData.coords.z, 10, 246, 0, 255)
+            DrawSphere2(laserData.coords, 0.01, 10, 246, 0, 255)
         end
         Citizen.Wait(0)
     end
