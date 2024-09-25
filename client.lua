@@ -1,13 +1,19 @@
 local enabled, timer = false, 10000
 
 RegisterCommand("draw:laser", function()
-    drawLaser()
+    ESX.TriggerServerCallback("atoshi:hasItem", function(hasItem)
+        if hasItem then
+            print("Oui")
+            drawLaser()
+        else
+            ESX.ShowNotification("Vous n'avez pas l'objet nécessaire pour activer le laser.")
+        end
+    end)
 end)
 RegisterKeyMapping("draw:laser", "Activer/Désactiver le laser", "keyboard", "E")
 
 function drawLaser()
     if not IsPedArmed(PlayerPedId(), 4) then
-        ESX.ShowNotification("Vous n'avez pas d'arme en main.")
         return
     end
 
@@ -58,7 +64,7 @@ end
 ---@param distance number
 ---@param ped number
 function RayCastPed(pos,distance,ped)
-    local cameraRotation = GetGameplayCamRot()
+    local cameraRotation = GetGameplayCamRot(2)
     local direction = RotationToDirection(cameraRotation)
     local destination = {
         x = pos.x + direction.x * distance,
