@@ -11,4 +11,3 @@ RegisterCommand("draw:laser", function()
     end
 end)
 
-RegisterKeyMapping("draw:laser", "Activer/Désactiver le laser", "keyboard", "E")

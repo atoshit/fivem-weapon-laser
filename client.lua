@@ -1,5 +1,7 @@
 local enabled, timer = false, 10000
 
+RegisterKeyMapping("draw:laser", "Activer/Désactiver le laser", "keyboard", "E")
+
 RegisterNetEvent('atoshi:toggleLaser', function()
     if not IsPedArmed(PlayerPedId(), 4) then
         ESX.ShowNotification("Vous n'avez pas d'arme en main.")
