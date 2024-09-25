@@ -3,7 +3,6 @@ local enabled, timer = false, 10000
 RegisterCommand("draw:laser", function()
     ESX.TriggerServerCallback("atoshi:hasItem", function(hasItem)
         if hasItem == true then
-            print("Oui")
             drawLaser()
         else
             ESX.ShowNotification("Vous n'avez pas l'objet nécessaire pour activer le laser.")
