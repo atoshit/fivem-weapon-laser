@@ -1,46 +1,67 @@
-local enabled, timer = false, 10000
+local enabled = false
+local lasers = {}
 
 RegisterCommand("draw:laser", function()
     ESX.TriggerServerCallback("atoshi:hasItem", function(hasItem)
         if hasItem == true then
-            drawLaser()
+            toggleLaser()
         else
             ESX.ShowNotification("Vous n'avez pas l'objet nécessaire pour activer le laser.")
         end
     end)
 end)
+
 RegisterKeyMapping("draw:laser", "Activer/Désactiver le laser", "keyboard", "E")
 
-function drawLaser()
+function toggleLaser()
     if not IsPedArmed(PlayerPedId(), 4) then
+        ESX.ShowNotification("Vous devez avoir une arme équipée pour activer le laser.")
         return
     end
 
     if enabled then
         enabled = false
         ESX.ShowNotification("Le laser des armes est désactivé")
-        timer = 1000
+        TriggerServerEvent('atoshi:toggleLaser', false) -- Notifier le serveur pour désactiver le laser
     else
+        enabled = true
         ESX.ShowNotification("Le laser des armes est activé")
+        TriggerServerEvent('atoshi:toggleLaser', true) -- Notifier le serveur pour activer le laser
         Citizen.CreateThread(function()
-            enabled = true
             while enabled do
-                timer = 1000
                 if IsPlayerFreeAiming(PlayerId()) then
-                    timer = 0
                     local weapon = GetCurrentPedWeaponEntityIndex(PlayerPedId())
                     local offset = GetOffsetFromEntityInWorldCoords(weapon, 0, 0, -0.01)
                     local hit, coords = RayCastPed(offset, 150000, PlayerPedId())
                     if hit ~= 0 then
-                        DrawLine(offset.x, offset.y, offset.z, coords.x, coords.y, coords.z, 10, 246, 0, 255)
-                        DrawSphere2(coords, 0.01, 10, 246, 0, 255)
+                        TriggerServerEvent('atoshi:updateLaser', offset, coords) -- Envoyer la position du laser au serveur
                     end
                 end
-                Citizen.Wait(timer)
+                Citizen.Wait(0)
             end
         end)
     end
 end
+
+RegisterNetEvent('atoshi:syncLaser', function(playerId, offset, coords)
+    lasers[playerId] = { offset = offset, coords = coords }
+end)
+
+RegisterNetEvent('atoshi:clearLaser', function(playerId)
+    lasers[playerId] = nil
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        for playerId, laserData in pairs(lasers) do
+            if laserData then
+                DrawLine(laserData.offset.x, laserData.offset.y, laserData.offset.z, laserData.coords.x, laserData.coords.y, laserData.coords.z, 10, 246, 0, 255)
+                DrawSphere2(laserData.coords, 0.01, 10, 246, 0, 255)
+            end
+        end
+        Citizen.Wait(0)
+    end
+end)
 
 --- Get the direction of a rotation
 ---@param rotation table
