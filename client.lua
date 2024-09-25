@@ -21,6 +21,13 @@ function drawLaser()
         ESX.ShowNotification("Le laser des armes est désactivé")
         timer = 1000
     else
+        FreezeEntityPosition(PlayerPedId(), true)
+        RequestAnimDict("anim@mp_player_intmenu@key_fob@")
+        repeat Wait(0) until HasAnimDictLoaded("anim@mp_player_intmenu@key_fob@")
+        TaskPlayAnim(PlayerPedId(), "anim@mp_player_intmenu@key_fob@", "fob_click", 8.0, -8.0, -1, 50, 0, false, false, false)
+        Wait(1000)
+        ClearPedTasks(PlayerPedId())
+        FreezeEntityPosition(PlayerPedId(), false)
         ESX.ShowNotification("Le laser des armes est activé")
         Citizen.CreateThread(function()
             enabled = true
