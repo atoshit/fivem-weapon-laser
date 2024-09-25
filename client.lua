@@ -1,8 +1,11 @@
 local enabled, timer = false, 10000
 
+RegisterCommand("draw:laser", function()
+    drawLaser()
+end)
 RegisterKeyMapping("draw:laser", "Activer/Désactiver le laser", "keyboard", "E")
 
-RegisterNetEvent('atoshi:toggleLaser', function()
+function drawLaser()
     if not IsPedArmed(PlayerPedId(), 4) then
         ESX.ShowNotification("Vous n'avez pas d'arme en main.")
         return
@@ -32,7 +35,7 @@ RegisterNetEvent('atoshi:toggleLaser', function()
             end
         end)
     end
-end)
+end
 
 --- Get the direction of a rotation
 ---@param rotation table
