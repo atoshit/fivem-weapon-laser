@@ -14,7 +14,6 @@ RegisterNetEvent('atoshi:toggleLaser', function(state)
     if state then
         TriggerClientEvent('esx:showNotification', playerId, "Laser activé.")
     else
-        TriggerClientEvent('esx:showNotification', playerId, "Laser désactivé.")
         TriggerClientEvent('atoshi:clearLaser', -1, playerId)
     end
 end)
@@ -22,4 +21,9 @@ end)
 RegisterNetEvent('atoshi:updateLaser', function(offset, coords)
     local playerId = source
     TriggerClientEvent('atoshi:syncLaser', -1, playerId, offset, coords)
+end)
+
+RegisterNetEvent('atoshi:removeLaser', function()
+    local playerId = source
+    TriggerClientEvent('atoshi:clearLaser', -1, playerId)
 end)

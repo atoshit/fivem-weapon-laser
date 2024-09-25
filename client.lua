@@ -22,11 +22,10 @@ function toggleLaser()
     if enabled then
         enabled = false
         ESX.ShowNotification("Le laser des armes est désactivé")
-        TriggerServerEvent('atoshi:toggleLaser', false) -- Notifier le serveur pour désactiver le laser
+        TriggerServerEvent('atoshi:toggleLaser', false)
     else
         enabled = true
         ESX.ShowNotification("Le laser des armes est activé")
-        TriggerServerEvent('atoshi:toggleLaser', true) -- Notifier le serveur pour activer le laser
         Citizen.CreateThread(function()
             while enabled do
                 if IsPlayerFreeAiming(PlayerId()) then
@@ -34,8 +33,10 @@ function toggleLaser()
                     local offset = GetOffsetFromEntityInWorldCoords(weapon, 0, 0, -0.01)
                     local hit, coords = RayCastPed(offset, 150000, PlayerPedId())
                     if hit ~= 0 then
-                        TriggerServerEvent('atoshi:updateLaser', offset, coords) -- Envoyer la position du laser au serveur
+                        TriggerServerEvent('atoshi:updateLaser', offset, coords)
                     end
+                else
+                    TriggerServerEvent('atoshi:removeLaser')
                 end
                 Citizen.Wait(0)
             end
@@ -53,7 +54,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        for playerId, laserData in pairs(lasers) do
+        for _, laserData in pairs(lasers) do
             if laserData then
                 DrawLine(laserData.offset.x, laserData.offset.y, laserData.offset.z, laserData.coords.x, laserData.coords.y, laserData.coords.z, 10, 246, 0, 255)
                 DrawSphere2(laserData.coords, 0.01, 10, 246, 0, 255)
