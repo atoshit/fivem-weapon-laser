@@ -1,6 +1,6 @@
 local enabled, timer = false, 10000
 
-RegisterEvent('atoshi:toggleLaser', function()
+RegisterNetEvent('atoshi:toggleLaser', function()
     toggleLaser()
 end)
 
