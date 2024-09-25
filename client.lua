@@ -1,11 +1,7 @@
 local enabled, timer = false, 10000
 
-exports(Config.itemName, function(data, slot)
-        exports.ox_inventory:useItem(data, function(data)
-            if data then
-                toggleLaser()
-            end
-        end)
+RegisterEvent('atoshi:toggleLaser', function()
+    toggleLaser()
 end)
 
 function toggleLaser()
