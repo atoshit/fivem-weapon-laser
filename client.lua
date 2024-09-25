@@ -8,10 +8,10 @@ function toggleLaser()
     local ped = PlayerPedId()
     if enabled then
         enabled = false
-        print("Laser has been disabled")
+        ESX.ShowNotification("Le laser des armes est désactivé")
         timer = 1000
     else
-        print("Laser has been enabled")
+        ESX.ShowNotification("Le laser des armes est activé")
         Citizen.CreateThread(function()
             enabled = true
             while enabled do
