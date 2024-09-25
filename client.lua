@@ -1,5 +1,6 @@
 local enabled = false
 local lasers = {}
+local currentWeapon = nil
 
 RegisterCommand("draw:laser", function()
     ESX.TriggerServerCallback("atoshi:hasItem", function(hasItem)
@@ -20,14 +21,21 @@ function toggleLaser()
     end
 
     if enabled then
-        enabled = false
-        ESX.ShowNotification("Le laser des armes est désactivé")
-        TriggerServerEvent('atoshi:toggleLaser', false)
+        disableLaser()
     else
         enabled = true
         ESX.ShowNotification("Le laser des armes est activé")
         Citizen.CreateThread(function()
             while enabled do
+                local newWeapon = GetSelectedPedWeapon(PlayerPedId())
+                if newWeapon == `WEAPON_UNARMED` then
+                    disableLaser()
+                elseif currentWeapon and newWeapon ~= currentWeapon then
+                    disableLaser()
+                else
+                    currentWeapon = newWeapon
+                end
+
                 if IsPlayerFreeAiming(PlayerId()) then
                     local weapon = GetCurrentPedWeaponEntityIndex(PlayerPedId())
                     local offset = GetOffsetFromEntityInWorldCoords(weapon, 0, 0, -0.01)
@@ -44,6 +52,14 @@ function toggleLaser()
     end
 end
 
+function disableLaser()
+    enabled = false
+    ESX.ShowNotification("Le laser des armes est désactivé")
+    TriggerServerEvent('atoshi:toggleLaser', false)
+    TriggerServerEvent('atoshi:removeLaser')
+    currentWeapon = nil
+end
+
 RegisterNetEvent('atoshi:syncLaser', function(playerId, offset, coords)
     lasers[playerId] = { offset = offset, coords = coords }
 end)
@@ -54,7 +70,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        for _, laserData in pairs(lasers) do
+        for playerId, laserData in pairs(lasers) do
             if laserData then
                 DrawLine(laserData.offset.x, laserData.offset.y, laserData.offset.z, laserData.coords.x, laserData.coords.y, laserData.coords.z, 10, 246, 0, 255)
                 DrawSphere2(laserData.coords, 0.01, 10, 246, 0, 255)
