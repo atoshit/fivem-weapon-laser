@@ -35,14 +35,12 @@ end
 --- Get the direction of a rotation
 ---@param rotation table
 local function RotationToDirection(rotation)
-    local adjustedRotation =
-    {
+    local adjustedRotation = {
         x = (math.pi / 180) * rotation.x,
         y = (math.pi / 180) * rotation.y,
         z = (math.pi / 180) * rotation.z
     }
-    local direction =
-    {
+    local direction = {
         x = -math.sin(adjustedRotation.z) * math.abs(math.cos(adjustedRotation.x)),
         y = math.cos(adjustedRotation.z) * math.abs(math.cos(adjustedRotation.x)),
         z = math.sin(adjustedRotation.x)
@@ -57,8 +55,7 @@ end
 function RayCastPed(pos,distance,ped)
     local cameraRotation = GetGameplayCamRot()
     local direction = RotationToDirection(cameraRotation)
-    local destination =
-    {
+    local destination = {
         x = pos.x + direction.x * distance,
         y = pos.y + direction.y * distance,
         z = pos.z + direction.z * distance
