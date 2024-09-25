@@ -1,6 +1,7 @@
 local enabled, timer = false, 10000
 
-ESX.RegisterUsableItem(Config.itemName, function()
+RegisterEvent('atoshi:enableLaser')
+AddEventHandler('atoshi:enableLaser', function()
     toggleLaser()
 end)
 
