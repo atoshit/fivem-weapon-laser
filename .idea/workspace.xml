@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38bebd5a-81ab-466e-9874-ad892972919e" name="Changes" comment="Fix">
+    <list default="true" id="38bebd5a-81ab-466e-9874-ad892972919e" name="Changes" comment="Add statebag use">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server.lua" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727228868466</updated>
-      <workItem from="1727228869701" duration="7439000" />
+      <workItem from="1727228869701" duration="7724000" />
     </task>
     <task id="LOCAL-00001" summary="Full System">
       <option name="closed" value="true" />
@@ -290,7 +291,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727235946206</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Add statebag use">
+      <option name="closed" value="true" />
+      <created>1727236418084</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1727236418084</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,6 +309,7 @@
     <MESSAGE value="Full System" />
     <MESSAGE value="Add animation" />
     <MESSAGE value="Fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix" />
+    <MESSAGE value="Add statebag use" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add statebag use" />
   </component>
 </project>

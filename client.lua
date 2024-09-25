@@ -6,8 +6,6 @@ RegisterCommand("draw:laser", function()
     ESX.TriggerServerCallback("atoshi:hasItem", function(hasItem)
         if hasItem == true then
             toggleLaser()
-        else
-            ESX.ShowNotification("Vous n'avez pas l'objet nécessaire pour activer le laser.")
         end
     end)
 end)
@@ -16,7 +14,6 @@ RegisterKeyMapping("draw:laser", "Activer/Désactiver le laser", "keyboard", "E"
 
 function toggleLaser()
     if not IsPedArmed(PlayerPedId(), 4) then
-        ESX.ShowNotification("Vous devez avoir une arme équipée pour activer le laser.")
         return
     end
 
@@ -57,7 +54,6 @@ end
 
 function disableLaser()
     enabled = false
-    ESX.ShowNotification("Le laser des armes est désactivé")
     SetStateBagValue("laser_position", nil)
     currentWeapon = nil
 end

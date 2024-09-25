@@ -11,9 +11,7 @@ end)
 
 RegisterNetEvent('atoshi:toggleLaser', function(state)
     local playerId = source
-    if state then
-        TriggerClientEvent('esx:showNotification', playerId, "Laser activé.")
-    else
+    if not state then
         TriggerClientEvent('atoshi:clearLaser', -1, playerId)
     end
 end)
