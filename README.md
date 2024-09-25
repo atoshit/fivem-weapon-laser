@@ -23,6 +23,6 @@ Pour installer le script, suivez ces étapes :
 
 1. Clonez ou téléchargez le dépôt sur votre machine.
    ```bash
-   git clone <[URL_DU_DEPOT](https://github.com/atoshit/fivem-weapon-laser.git)>
+   git clone https://github.com/atoshit/fivem-weapon-laser.git>
 2. Glisser le dans votre dossier resources sur votre serveur
 3. Rajouter ```ensure fivem-weapon-laser``` dans votre fichier de configuration du serveur la plus part du temps appellé ```server.cfg```
