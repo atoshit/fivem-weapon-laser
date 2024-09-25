@@ -2,7 +2,7 @@
 
 ## Description
 
-Ce script permet aux joueurs de FiveM d'activer un laser sur leurs armes, offrant une expérience de jeu immersive et dynamique. Les joueurs peuvent activer ou désactiver le laser en appuyant sur une touche, et le laser est visible par tous les joueurs autour d'eux. De plus, le script désactive automatiquement le laser lorsque le joueur range son arme, évitant ainsi tout comportement imprévisible.
+Ce script permet aux joueurs de FiveM d'activer un laser sur leurs armes, offrant une expérience de jeu immersive et dynamique. Les joueurs peuvent activer ou désactiver le laser en appuyant sur une touche, et le laser est visible par tous les joueurs autour d'eux.
 
 ### Fonctionnalités
 - Activation et désactivation du laser avec un item en inventaire.
