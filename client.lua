@@ -1,38 +1,36 @@
-local enabled, timer = false, 10000
+local enabled = false
 
 RegisterNetEvent('atoshi:toggleLaser', function()
-    toggleLaser()
-end)
-
-function toggleLaser()
-    local ped = PlayerPedId()
     if enabled then
         enabled = false
         ESX.ShowNotification("Le laser des armes est désactivé")
-        timer = 1000
     else
         ESX.ShowNotification("Le laser des armes est activé")
         Citizen.CreateThread(function()
             enabled = true
             while enabled do
-                timer = 1000
                 if IsPlayerFreeAiming(PlayerId()) then
-                    timer = 0
-                    local weapon = GetCurrentPedWeaponEntityIndex(ped)
+                    local weapon = GetCurrentPedWeaponEntityIndex(PlayerPedId())
                     local offset = GetOffsetFromEntityInWorldCoords(weapon, 0, 0, -0.01)
-                    local hit, coords = RayCastPed(offset, 150000, ped)
+                    local hit, coords = RayCastPed(offset, 150000, PlayerPedId())
                     if hit ~= 0 then
                         DrawLine(offset.x, offset.y, offset.z, coords.x, coords.y, coords.z, 10, 246, 0, 255)
                         DrawSphere2(coords, 0.01, 10, 246, 0, 255)
                     end
+                    Citizen.Wait(0)
+                else
+                    Citizen.Wait(1000)
                 end
-                Citizen.Wait(timer)
+
+                if not enabled then
+                    break
+                end
             end
         end)
     end
-end
+end)
 
---- Get the direction of a rotation
+--- Convertit une rotation en direction
 ---@param rotation table
 local function RotationToDirection(rotation)
     local adjustedRotation = {
@@ -48,12 +46,12 @@ local function RotationToDirection(rotation)
     return direction
 end
 
---- RayCastPed
+--- Raycast pour obtenir la position frappée
 ---@param pos table
 ---@param distance number
 ---@param ped number
-function RayCastPed(pos,distance,ped)
-    local cameraRotation = GetGameplayCamRot()
+function RayCastPed(pos, distance, ped)
+    local cameraRotation = GetGameplayCamRot(2)
     local direction = RotationToDirection(cameraRotation)
     local destination = {
         x = pos.x + direction.x * distance,
@@ -61,11 +59,11 @@ function RayCastPed(pos,distance,ped)
         z = pos.z + direction.z * distance
     }
 
-    local a, b, c, d, e = GetShapeTestResult(StartShapeTestRay(pos.x, pos.y, pos.z, destination.x, destination.y, destination.z, -1, ped, 1))
-    return b, c
+    local hit, coords = GetShapeTestResult(StartShapeTestRay(pos.x, pos.y, pos.z, destination.x, destination.y, destination.z, -1, ped, 1))
+    return hit, coords
 end
 
---- Draw a line between two points
+--- Dessine une sphère à une position donnée
 ---@param pos table
 ---@param radius number
 ---@param r number

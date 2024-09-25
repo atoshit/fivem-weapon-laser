@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38bebd5a-81ab-466e-9874-ad892972919e" name="Changes" comment="Full System">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fxmanifest.lua" beforeDir="false" afterPath="$PROJECT_DIR$/fxmanifest.lua" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727228868466</updated>
-      <workItem from="1727228869701" duration="2151000" />
+      <workItem from="1727228869701" duration="2606000" />
     </task>
     <task id="LOCAL-00001" summary="Full System">
       <option name="closed" value="true" />
@@ -138,7 +138,39 @@
       <option name="project" value="LOCAL" />
       <updated>1727230946299</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Full System">
+      <option name="closed" value="true" />
+      <created>1727231058782</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1727231058782</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Full System">
+      <option name="closed" value="true" />
+      <created>1727231118950</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727231118950</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Full System">
+      <option name="closed" value="true" />
+      <created>1727231161258</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1727231161258</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Full System">
+      <option name="closed" value="true" />
+      <created>1727231275189</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727231275189</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
